@@ -1,30 +1,30 @@
 
 import numpy as np
 import pandas as pd
+from progress.bar import IncrementalBar
 
 from models import Inputs, Options
 
 
-def sample_from_pool(generator: np.random.Generator, pool: np.ndarray) -> int:
+def sample_from_pool(generator: np.random.Generator, pool: np.ndarray) -> tuple[int, np.ndarray]:
   choice = generator.choice(np.argwhere(pool))[0]
   pool[choice] = 0
-  return choice
+  return choice, pool
 
 def pick_best_candidate(
   connection_matrix: pd.DataFrame, solution: list[list[int]],
   table: int, pool: np.ndarray
-) -> int:
+) -> tuple[int, np.ndarray]:
   p_matrix = connection_matrix.iloc[solution[table]].sum().reset_index()[0]
-  p_matrix[np.nonzero(pool == 0)[0]] = 0
+  p_matrix[np.nonzero(pool == 0)[0]] = np.nan
   choice = p_matrix.idxmax()
   pool[choice] = 0
-  return choice
+  return choice, pool
 
 def greedy_generator(
-  connection_matrix: pd.DataFrame, options: Options,
-  random_seed:int=0,
+  connection_matrix: pd.DataFrame, options: Options, generator: np.random.Generator,
 ) -> list[list[int]]:
-  generator = np.random.default_rng(seed=random_seed)
+
   tables = range(options.max_tables)
   pool = np.ones(options.tot_guests)
   solution: list[list[int]] = [[] for _ in tables]
@@ -34,12 +34,12 @@ def greedy_generator(
       if pool.sum() == 0:
         return solution
       if len(solution[table]) == 0: 
-        solution[table].append(sample_from_pool(generator, pool))
+        choice, pool = sample_from_pool(generator, pool)
+        solution[table].append(choice)
       else:
-        solution[table].append(
-          pick_best_candidate(connection_matrix, solution, table, pool)
-        )
-  return [[]]
+        choice, pool = pick_best_candidate(connection_matrix, solution, table, pool)
+        solution[table].append(choice)
+  return solution
 
 def fitness_fun(solution: list[list[int]], connection_matrix: pd.DataFrame):
   return sum(
@@ -52,28 +52,28 @@ def fitness_fun(solution: list[list[int]], connection_matrix: pd.DataFrame):
 def get_options(inputs: Inputs, data: pd.DataFrame) -> Options:
   tot_guests = data.index.size
   return Options(
-    max_tables=np.ceil(tot_guests / int(inputs.min_guests_per_table)),
+    max_tables=np.ceil(tot_guests / int(inputs.min_guests_per_table)).astype(int),
     max_guests_per_table=int(inputs.max_guests_per_table),
     min_guests_per_table=int(inputs.min_guests_per_table),
     tot_guests=tot_guests,
     num_iterations=int(inputs.num_iterations)
   )
 
-def get_nonzero_connection_matrix(connection_matrix: pd.DataFrame) -> pd.DataFrame:
-  return connection_matrix - connection_matrix.min() + 1
-
 def run_greedy_algorithm(
   options: Options, connection_matrix: pd.DataFrame
 ) -> dict[str, list]:
-  connection_matrix = get_nonzero_connection_matrix(connection_matrix)
   results: dict[str, list] = {
     'solution': [],
     'score': [],
   }
-  for ii in range(options.num_iterations):
-    sol = greedy_generator(connection_matrix, options, ii)
-    results['solution'].append(sol)
-    results['score'].append(fitness_fun(sol, connection_matrix))
+  with IncrementalBar('Optimizing seating', max=options.num_iterations) as bar:
+    for ii in range(options.num_iterations):
+      generator = np.random.default_rng(seed=ii*10000)
+      sol = greedy_generator(connection_matrix, options, generator)
+      results['solution'].append(sol)
+      results['score'].append(fitness_fun(sol, connection_matrix))
+      bar.next()
+    bar.finish()
   return results
 
 def display_results(results: dict[str, list], options: Options, data: pd.DataFrame) -> None:
@@ -83,6 +83,6 @@ def display_results(results: dict[str, list], options: Options, data: pd.DataFra
   [
     print(
       f'Table {ii}:\n',
-      data.index[results_df['solution'][id_max][ii]]
+      data.loc[[*results_df['solution'][id_max][ii]], ['name', 'lastName']]
     ) for ii in range(options.max_tables)
   ]

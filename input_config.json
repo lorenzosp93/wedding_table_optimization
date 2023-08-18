@@ -68,7 +68,7 @@
     {
         "name": "num_iterations",
         "verbose_name": "Number of solutions for the Greedy Heuristic Algorithm",
-        "prompt": "Please choose the number of solutions to explore for the Greedy Heuristic Algorithm (default=50).",
+        "prompt": "Please choose the number of solutions to explore for the Greedy Heuristic Algorithm (default = 50).",
         "default": 50
     }
 ]
