@@ -15,7 +15,7 @@
         "name": "min_guests_per_table",
         "verbose_name": "Minimum number of guests per table",
         "prompt": "Please specify the minimum number of guests that can sit at a table (default = 8).",
-        "default": 8
+       "default": 8
     },
     {
         "name": "weight_partner",
@@ -68,7 +68,7 @@
     {
         "name": "num_iterations",
         "verbose_name": "Number of solutions for the Greedy Heuristic Algorithm",
-        "prompt": "Please choose the number of solutions to explore for the Greedy Heuristic Algorithm (default = 50).",
-        "default": 50
+        "prompt": "Please choose the number of solutions to explore for the Greedy Heuristic Algorithm (default = automatic).",
+        "default": 0
     }
 ]

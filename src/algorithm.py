@@ -62,12 +62,19 @@ def get_options(inputs: Inputs, data: pd.DataFrame) -> Options:
 def run_greedy_algorithm(
   options: Options, connection_matrix: pd.DataFrame
 ) -> dict[str, list]:
+
   results: dict[str, list] = {
     'solution': [],
     'score': [],
   }
-  with IncrementalBar('Optimizing seating', max=options.num_iterations) as bar:
-    for ii in range(options.num_iterations):
+
+  num_iterations = (
+    options.num_iterations if options.num_iterations > 0
+    else options.tot_guests * options.max_tables
+  )
+
+  with IncrementalBar('Optimizing seating', max=num_iterations) as bar:
+    for ii in range(num_iterations):
       generator = np.random.default_rng(seed=ii*10000)
       sol = greedy_generator(connection_matrix, options, generator)
       results['solution'].append(sol)
