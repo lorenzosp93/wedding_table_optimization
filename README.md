@@ -8,6 +8,7 @@ Multiple optimization strategies were evaluated, such as
 * Genetic Algorithm
 * Greedy Heuristic
 * Greedy Heuristic Seeded Genetic Algorithm
+
 see the `Tables Optimization.ipynb` notebook for more information.
 
 Ultimately the Greedy Heuristic proved to vastly outperform the other approaches both in term of results, and in terms of speed.
@@ -23,12 +24,13 @@ The guests are modeled by supplying a `.csv` file with the following columns:
 | partner     | integer | 1                         | 5000           | **Zero-based index** of the guest's partner in the list (if applicable).                                 |
 | preferences | integer | 5                         | 1000           | **Zero-based index**  of the guest's preferred table companion in the list (if applicable).              |
 | dislikes    | integer | 9                         | -1000          | **Zero-based index**  of the guest's undesired table companion in the list (if applicable).              |
-| languages   | string\* | italian\|english,spanish  | 500            | List of languages spoken fluently by the guest.                                                          |
+| languages   | string[^1] | italian\|english,spanish  | 500            | List of languages spoken fluently by the guest.                                                          |
 | age         | integer | 30                        | -300           | Age of the guest. Based on the weight, large gaps will be avoided (if negative).                         |
-| city        | string\* | Amsterdam,NL              | 50             | City of residence of the guest. People from the same city or country are likelier to be seated together. |
-| interests   | string\* | engineering;tech&politics | 100            | Key interests and hobbies. Guests with the same interests will be likelier to be seated together.        |
+| city        | string[^1] | Amsterdam,NL              | 50             | City of residence of the guest. People from the same city or country are likelier to be seated together. |
+| interests   | string[^1] | engineering;tech&politics | 100            | Key interests and hobbies. Guests with the same interests will be likelier to be seated together.        |
 
-\* the following separators are accepted: `,`, `;`, `&`, `|`, `-`, `+`.
+
+[^1]: the following separators are accepted: `,`, `;`, `&`, `|`, `-`, `+`.
 
 You can find an example `testing.csv` file in the root of this repository.
 
