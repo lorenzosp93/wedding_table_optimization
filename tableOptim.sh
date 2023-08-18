@@ -1,3 +1,3 @@
 #! /bin/sh
 
-./env/bin/python main.py
+./env/bin/python ./src/main.py

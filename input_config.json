@@ -2,8 +2,8 @@
     {
         "name": "path_to_sheet",
         "verbose_name": "Path to input spreadsheet",
-        "prompt": "Please enter the path to the input csv spreadsheet, relative to the current directory ( e.g. ./input.csv ).",
-        "default": "./input.csv"
+        "prompt": "Please enter the path to the input csv spreadsheet, relative to the current directory ( e.g. testing.csv ).",
+        "default": "testing.csv"
     },
     {
         "name": "max_guests_per_table",
