@@ -1,0 +1,74 @@
+[
+    {
+        "name": "path_to_sheet",
+        "verbose_name": "Path to input spreadsheet",
+        "prompt": "Please enter the path to the input csv spreadsheet, relative to the current directory ( e.g. ./input.csv ).",
+        "default": "./input.csv"
+    },
+    {
+        "name": "max_guests_per_table",
+        "verbose_name": "Maximum number of guests per table",
+        "prompt": "Please specify the maximum number of guests that can sit at a table (default = 10).",
+        "default": 10
+    },
+    {
+        "name": "min_guests_per_table",
+        "verbose_name": "Minimum number of guests per table",
+        "prompt": "Please specify the minimum number of guests that can sit at a table (default = 8).",
+        "default": 8
+    },
+    {
+        "name": "weight_partner",
+        "verbose_name": "Weight of the partner parameter",
+        "prompt": "Please provide the weight for the *partner* parameter. This should reflect how important it is for partners to sit together (default = 5000).",
+        "default": 5000
+    },
+    {
+        "name": "weight_preferences",
+        "verbose_name": "Weight of the preferences parameter",
+        "prompt": "Please provide the weight for the *preferences* parameter. This should reflect how important it is for individual preferences to be taken into account for the seating arrangement (default = 1000).",
+        "default": 1000
+    },
+    {
+        "name": "weight_dislikes",
+        "verbose_name": "Weight of the dislikes parameter",
+        "prompt": "Please provide the weight for the *dislikes* parameter. This should reflect how important it is for individual dislikes to be taken into account for the seating arrangement (default = -1000).",
+        "default": -1000
+    },
+    {
+        "name": "weight_languages",
+        "verbose_name": "Weight of the languages parameter",
+        "prompt": "Please provide the weight for the *languages* parameter. This should reflect how important it is for people sitting together to speak the same language (default = 500)",
+        "default": 500
+    },
+    {
+        "name": "weight_age",
+        "verbose_name": "Weight of the age parameter",
+        "prompt": "Please provide the weight for the *age* parameter. This should reflect how important it is for people sitting together to have a small age difference (default = -300)",
+        "default": -300
+    },
+    {
+        "name": "weight_city",
+        "verbose_name": "Weight of the city parameter",
+        "prompt": "Please provide the weight for the *city* parameter. This should reflect how important it is for people sitting together to live in the same city (default = 50)",
+        "default": 50
+    },
+    {
+        "name": "weight_interests",
+        "verbose_name": "Weight of the interests parameter",
+        "prompt": "Please provide the weight for the *interests* parameter. This should reflect how important it is for people sitting together to have some shared interests (default = 100)",
+        "default": 100
+    },
+    {
+        "name": "weight_lastName",
+        "verbose_name": "Weight of the lastName parameter",
+        "prompt": "Please provide the weight for the *lastName* parameter. This should reflect how important it is for people sitting together to have the same last name (correlating with family relations, default = 20)",
+        "default": 20
+    },
+    {
+        "name": "num_iterations",
+        "verbose_name": "Number of solutions for the Greedy Heuristic Algorithm",
+        "prompt": "Please choose the number of solutions to explore for the Greedy Heuristic Algorithm (default=50).",
+        "default": 50
+    }
+]
