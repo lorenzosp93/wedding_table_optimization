@@ -49,4 +49,4 @@ The following inputs are supported:
 * path to the guest modeling spreadsheet
 * maximum number of guests per table
 * parameter weights
-* number of random iterations of the algorithm (`default = tot_guests * max_tables`).
+* number of random iterations of the algorithm (`default = tot_guests * 2`).

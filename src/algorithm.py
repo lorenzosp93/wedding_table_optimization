@@ -104,9 +104,7 @@ def run_greedy_algorithm(options: Options, connection_matrix: np.ndarray) -> Res
     )
 
     num_iterations = (
-        options.num_iterations
-        if options.num_iterations > 0
-        else options.tot_guests * options.max_tables
+        options.num_iterations if options.num_iterations > 0 else options.tot_guests * 2
     )
 
     with IncrementalBar("Optimizing seating", max=num_iterations) as bar:
