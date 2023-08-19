@@ -40,6 +40,6 @@ def calc_connection_matrix(data: pd.DataFrame, weights: ParameterWeights) -> pd.
   coefficient_matrix['preferences'] = calc_target_col(data.preferences, data.index)
   coefficient_matrix['dislikes'] = calc_target_col(data.dislikes, data.index)
   return sum([
-    coefficient_matrix[key] * val
+    coefficient_matrix[key] * int(val)
     for key, val in weights.__dict__.items()
   ])

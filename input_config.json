@@ -21,19 +21,19 @@
         "name": "weight_partner",
         "verbose_name": "Weight of the partner parameter",
         "prompt": "Please provide the weight for the *partner* parameter. This should reflect how important it is for partners to sit together (default = 5000).",
-        "default": 5000
+        "default": 6000
     },
     {
         "name": "weight_preferences",
         "verbose_name": "Weight of the preferences parameter",
         "prompt": "Please provide the weight for the *preferences* parameter. This should reflect how important it is for individual preferences to be taken into account for the seating arrangement (default = 1000).",
-        "default": 1000
+        "default": 800
     },
     {
         "name": "weight_dislikes",
         "verbose_name": "Weight of the dislikes parameter",
         "prompt": "Please provide the weight for the *dislikes* parameter. This should reflect how important it is for individual dislikes to be taken into account for the seating arrangement (default = -1000).",
-        "default": -1000
+        "default": -1200
     },
     {
         "name": "weight_languages",
