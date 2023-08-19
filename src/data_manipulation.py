@@ -37,9 +37,7 @@ def calc_target_col(column: pd.Series, index: pd.Index) -> pd.DataFrame:
     return pd.DataFrame(target_matrix, index=index, columns=index)
 
 
-def calc_connection_matrix(
-    data: pd.DataFrame, weights: ParameterWeights
-) -> pd.DataFrame:
+def calc_connection_matrix(data: pd.DataFrame, weights: ParameterWeights) -> np.ndarray:
     coefficient_matrix = {}
     coefficient_matrix["languages"] = calc_encoded_col(data.languages)
     coefficient_matrix["city"] = calc_encoded_col(data.city)
@@ -51,4 +49,4 @@ def calc_connection_matrix(
     coefficient_matrix["dislikes"] = calc_target_col(data.dislikes, data.index)
     return sum(
         [coefficient_matrix[key] * int(val) for key, val in weights.__dict__.items()]
-    )
+    ).to_numpy()

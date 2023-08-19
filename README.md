@@ -21,9 +21,9 @@ The guests are modeled by supplying a `.csv` file with the following columns:
 |-------------|---------|---------------------------|----------------|----------------------------------------------------------------------------------------------------------|
 | name        | string  | Lorenzo                   | n/a            | Only used for rendering outputs                                                                          |
 | lastName    | string  | Spinelli                  | 20             | People with the same last name will be likelier to be seated together.                                   |
-| partner     | integer | 1                         | 5000           | **Zero-based index** of the guest's partner in the list (if applicable).                                 |
-| preferences | integer | 5                         | 1000           | **Zero-based index**  of the guest's preferred table companion in the list (if applicable).              |
-| dislikes    | integer | 9                         | -1000          | **Zero-based index**  of the guest's undesired table companion in the list (if applicable).              |
+| partner     | integer | 1                         | 6000           | **Zero-based index** of the guest's partner in the list (if applicable).                                 |
+| preferences | integer | 5                         |  800           | **Zero-based index**  of the guest's preferred table companion in the list (if applicable).              |
+| dislikes    | integer | 9                         | -1200          | **Zero-based index**  of the guest's undesired table companion in the list (if applicable).              |
 | languages   | string[^1] | italian\|english,spanish  | 500            | List of languages spoken fluently by the guest.                                                          |
 | age         | integer | 30                        | -300           | Age of the guest. Based on the weight, large gaps will be avoided (if negative).                         |
 | city        | string[^1] | Amsterdam,NL              | 50             | City of residence of the guest. People from the same city or country are likelier to be seated together. |
@@ -48,6 +48,5 @@ The following inputs are supported:
 
 * path to the guest modeling spreadsheet
 * maximum number of guests per table
-* minimum number of guests per table
 * parameter weights
 * number of random iterations of the algorithm (`default = tot_guests * max_tables`).
