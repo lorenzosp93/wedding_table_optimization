@@ -1,3 +1,4 @@
 #! /bin/sh
 
-./env/bin/python ./src/main.py
+pip install -r requirements.txt
+python ./src/main.py

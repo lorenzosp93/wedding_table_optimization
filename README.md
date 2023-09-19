@@ -36,7 +36,7 @@ You can find an example `testing.csv` file in the root of this repository.
 
 ## Usage
 
-A shell script is provided for UNIX users. You can simply run the following command:
+A shell script is provided for UNIX users (Python must be installed). You can simply run the following command:
 
 ```source tableOptim.sh```
 
