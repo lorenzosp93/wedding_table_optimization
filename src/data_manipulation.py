@@ -47,6 +47,11 @@ def calc_connection_matrix(data: pd.DataFrame, weights: ParameterWeights) -> np.
     coefficient_matrix["partner"] = calc_target_col(data.partner, data.index)
     coefficient_matrix["preferences"] = calc_target_col(data.preferences, data.index)
     coefficient_matrix["dislikes"] = calc_target_col(data.dislikes, data.index)
-    return sum(
-        [coefficient_matrix[key] * int(val) for key, val in weights.__dict__.items()]
+    return normalize_matrix(
+        sum(
+            [
+                coefficient_matrix[key] * int(val)
+                for key, val in weights.__dict__.items()
+            ]
+        )
     ).to_numpy()

@@ -118,7 +118,7 @@ def run_greedy_algorithm(options: Options, connection_matrix: np.ndarray) -> Res
     return results
 
 
-def display_results(results: Results, options: Options, data: pd.DataFrame) -> None:
+def print_results(results: Results, options: Options, data: pd.DataFrame) -> None:
     results_df = pd.DataFrame(results.__dict__)
     id_max = results_df["score"].idxmax()
     print("Max score: ", results_df["score"][id_max])
